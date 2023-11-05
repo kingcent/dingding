@@ -1,4 +1,4 @@
-module github.com/goex-top/dingding
+module github.com/kingcent/dingding
 
 go 1.17
 
