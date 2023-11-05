@@ -2,10 +2,11 @@ package dingding
 
 import (
 	"encoding/json"
-	"gopkg.in/go-playground/validator.v9"
 	"io/ioutil"
 	"net/http"
 	"strings"
+
+	"gopkg.in/go-playground/validator.v9"
 )
 
 const (
@@ -116,6 +117,8 @@ func convertMarkdown(m Markdown) map[string]interface{} {
 	paramsMap[MsgTypeMarkdown] = map[string]string{MsgTypeText: m.Content, "title": m.Title}
 	if m.AtAll {
 		paramsMap["at"] = map[string]interface{}{"isAtAll": true, "atUserIds": nil, "atMobiles": nil}
+	} else if m.AtPerson != nil {
+		paramsMap["at"] = map[string]interface{}{"isAtAll": false, "atUserIds": m.AtPerson, "atMobiles": nil}
 	}
 	return paramsMap
 }
